@@ -125,6 +125,8 @@ Devise.setup do |config|
   # a value of 20 is already extremely slow: approx. 60 seconds for 1 calculation).
   config.stretches = Rails.env.test? ? 1 : 12
 
+  config.scoped_views = true
+
   # Set up a pepper to generate the hashed password.
   # config.pepper = '5f81abb314748efe0748b111fd0d265298356359b7e0c5e951da1bfdeff76d13f2fd9ee23a70ca0a2922bd9de8bc6ca0a7a9fa4d3239ef77f5eff1e880dba315'
 
@@ -164,7 +166,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  # config.remember_for = 2.weeks
+  config.remember_for = 2.weeks
 
   # Invalidates all the remember me tokens when the user signs out.
   config.expire_all_remember_me_on_sign_out = true
