@@ -1,6 +1,6 @@
 .background
   .wrapper
-    .title Login Form
+    .title Login
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .field
         = f.email_field :email, required: true, autofocus: true, autocomplete: "email"
