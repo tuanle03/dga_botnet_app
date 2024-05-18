@@ -112,6 +112,9 @@ GEM
       haml (>= 4.0)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.5)
@@ -139,6 +142,7 @@ GEM
     mini_portile2 (2.8.6)
     minitest (5.22.3)
     msgpack (1.7.2)
+    multi_xml (0.6.0)
     net-imap (0.4.11)
       date
       net-protocol
@@ -259,6 +263,7 @@ DEPENDENCIES
   devise
   haml-rails
   html2haml
+  httparty
   importmap-rails
   jbuilder
   puma (~> 5.0)
