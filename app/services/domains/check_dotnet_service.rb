@@ -11,7 +11,7 @@ class Domains::CheckDotnetService
     response = self.class.post('/api/check',
                                body: request_body.to_json,
                                headers: { 'Content-Type' => 'application/json' })
-    handle_response(JSON.parse(response.body))
+    handle_response(response)
   end
 
   private
@@ -25,10 +25,11 @@ class Domains::CheckDotnetService
   end
 
   def handle_response(response)
-    if response['status'] == 'success'
-      { success: true, result: response['result'] }
-    elsif response['status'] == 'error'
-      { success: false, error: response['error'] }
+    if response.success?
+      result = JSON.parse(response.body, symbolize_names: true)
+      { success: true, result: result }
+    else
+      raise 'Error'
     end
   end
 end

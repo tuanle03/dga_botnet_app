@@ -35,6 +35,8 @@ gem 'devise'
 gem 'haml-rails'
 gem 'html2haml'
 gem 'httparty'
+gem 'jquery-rails'
+gem 'byebug'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem 'kredis'

@@ -1,0 +1,48 @@
+%h1 Meow Botnet Service
+
+= form_with model: @domain, local: true do |f|
+  .form-group
+    = f.label :name, 'Domain Name'
+    = f.text_field :name, class: 'form-control', id: 'domain-name'
+
+  .form-group
+    = f.label :model_type, 'Model Type'
+    = f.select :model_type, @models_by_type.keys, {}, class: 'form-control', id: 'model_type_select'
+
+  .form-group
+    = f.label :model_identifier, 'Model Identifier'
+    = f.select :model_identifier, [], {}, class: 'form-control', id: 'model_identifier_select'
+
+  .form-group
+    = f.submit 'Check Domain', class: 'btn btn-primary'
+
+:javascript
+  document.addEventListener("DOMContentLoaded", function() {
+    const modelsByType = #{ @models_by_type.to_json.html_safe };
+    const modelTypeSelect = document.getElementById('model_type_select');
+    const modelIdentifierSelect = document.getElementById('model_identifier_select');
+
+    function updateModelIdentifiers() {
+      const selectedType = modelTypeSelect.value;
+      const modelIdentifiers = modelsByType[selectedType] || [];
+      modelIdentifierSelect.innerHTML = '';
+      modelIdentifiers.forEach(function(identifier) {
+        const option = document.createElement('option');
+        option.value = identifier;
+        option.textContent = identifier;
+        modelIdentifierSelect.appendChild(option);
+      });
+    }
+
+    modelTypeSelect.addEventListener('change', updateModelIdentifiers);
+    updateModelIdentifiers();
+
+    var inputField = document.getElementById('domain-name');
+
+    inputField.addEventListener('input', function(event) {
+      var inputValue = event.target.value;
+      if (/[^a-zA-Z0-9\-.]/.test(inputValue)) {
+        event.target.value = inputValue.replace(/[^a-zA-Z0-9\-.]/g, '');
+      }
+    });
+  });

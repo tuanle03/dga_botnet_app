@@ -6,6 +6,5 @@ Rails.application.routes.draw do
   }
 
   resources :domains, only: [:index, :new, :create]
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root 'domains#index'
 end
