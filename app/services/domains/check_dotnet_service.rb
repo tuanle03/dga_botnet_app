@@ -27,7 +27,7 @@ class Domains::CheckDotnetService
   def handle_response(response)
     if response.success?
       result = JSON.parse(response.body, symbolize_names: true)
-      { success: true, result: result }
+      { success: true, result: result[:result] }
     else
       raise 'Error'
     end

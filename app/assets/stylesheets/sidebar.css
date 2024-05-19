@@ -1,0 +1,46 @@
+.sidebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  /* background: linear-gradient(-135deg, #4158d0, #c850c0); */
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.sidebar-left {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.sidebar-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
+  margin-right: 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.logout-btn, .login-btn {
+  color: #fff;
+  text-decoration: none;
+  background: none;
+  border: 2px solid #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.logout-btn:hover, .login-btn:hover {
+  background: #fff;
+  color: #4158d0;
+}
+
+.sidebar-left a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}

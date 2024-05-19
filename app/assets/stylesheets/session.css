@@ -13,13 +13,21 @@ html, body {
   overflow: hidden;
 }
 
-.background {
-  display: flex;
+.background-home {
   height: 100%;
   width: 100%;
   align-items: center;
   justify-content: center;
   background: linear-gradient(-135deg, #c850c0, #4158d0);
+  /* animation: backgroundFadeIn 1s ease-out; */
+}
+
+.background {
+  display: flex;
+  height: 80%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
   /* animation: backgroundFadeIn 1s ease-out; */
 }
 

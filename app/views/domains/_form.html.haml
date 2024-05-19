@@ -1,0 +1,44 @@
+.domain-wrapper
+  .domain-title Check Your Domain
+  = form_with model: @domain, local: true do |f|
+    .domain-field
+      = f.text_field :name, required: true, class: 'domain-input-name', id: 'domain-name', autocomplete: 'off'
+      = f.label :name, 'Domain Name'
+      = f.submit 'Check', class: 'domain-btn'
+    .domain-field
+      = f.select :model_type, @models_by_type.keys, {}, class: 'domain-input', id: 'model_type_select'
+      = f.label :model_type, 'Model Type'
+    .domain-field
+      = f.select :model_identifier, [], {}, class: 'domain-input', id: 'model_identifier_select'
+      = f.label :model_identifier, 'Model Identifier'
+
+:javascript
+  document.addEventListener("DOMContentLoaded", function() {
+    const modelsByType = #{ @models_by_type.to_json.html_safe };
+    const modelTypeSelect = document.getElementById('model_type_select');
+    const modelIdentifierSelect = document.getElementById('model_identifier_select');
+
+    function updateModelIdentifiers() {
+      const selectedType = modelTypeSelect.value;
+      const modelIdentifiers = modelsByType[selectedType] || [];
+      modelIdentifierSelect.innerHTML = '';
+      modelIdentifiers.forEach(function(identifier) {
+        const option = document.createElement('option');
+        option.value = identifier;
+        option.textContent = identifier;
+        modelIdentifierSelect.appendChild(option);
+      });
+    }
+
+    modelTypeSelect.addEventListener('change', updateModelIdentifiers);
+    updateModelIdentifiers();
+
+    var inputField = document.getElementById('domain-name');
+
+    inputField.addEventListener('input', function(event) {
+      var inputValue = event.target.value;
+      if (/[^a-zA-Z0-9\-.]/.test(inputValue)) {
+        event.target.value = inputValue.replace(/[^a-zA-Z0-9\-.]/g, '');
+      }
+    });
+  });

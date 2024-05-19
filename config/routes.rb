@@ -5,6 +5,6 @@ Rails.application.routes.draw do
     sign_up: 'signup'
   }
 
-  resources :domains, only: [:index, :new, :create]
+  resources :domains, only: [:index, :create]
   root 'domains#index'
 end
