@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     sign_out: 'logout',
     sign_up: 'signup'
   }
-  # Defines the root path route ("/")
-  # root "articles#index"
+
+  resources :domains, only: [:index, :new, :create]
+  root 'domains#index'
 end

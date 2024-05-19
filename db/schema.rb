@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_17_202037) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_18_100856) do
   create_table "domains", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
     t.string "model_type"
-    t.string "model_name"
-    t.integer "model_result"
+    t.string "model_identifier"
+    t.string "model_result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

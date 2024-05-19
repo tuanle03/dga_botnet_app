@@ -4,7 +4,7 @@ class CreateDomains < ActiveRecord::Migration[7.0]
       t.integer :user_id
       t.string :name
       t.string :model_type
-      t.string :model_name
+      t.string :model_identifier
       t.integer :model_result
 
       t.timestamps
