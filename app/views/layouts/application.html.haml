@@ -12,11 +12,11 @@
     .background-home
       .sidebar
         .sidebar-left
-          %a{:href => "/"} Meow Botnet Service
+          %a.hover-effect{:href => "/"} Meow Botnet Service
         .sidebar-right
           - if user_signed_in?
             .user-name
-              = current_user.email
+              = 'Welcome, ' + current_user.email
             = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'login-btn'
           - else
             = link_to 'Login', new_user_session_path, class: 'login-btn'

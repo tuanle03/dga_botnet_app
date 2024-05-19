@@ -1,4 +1,3 @@
-/* app/assets/stylesheets/domain_form.css */
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
 .domain-wrapper {
@@ -120,6 +119,11 @@
   transition: all 0.3s ease;
   border-radius: 25px;
   float: right;
+}
+
+.domain-btn:hover {
+  background: linear-gradient(-135deg, #4158d0, #c850c0);
+  transform: scale(1.05);
 }
 
 .domain-btn:active {

@@ -1,0 +1,23 @@
+- domains = current_user.domains.order(created_at: :desc)
+.user-domains
+  .domain-title Check Results
+  - if domains.any?
+    %table.domain-table
+      %thead
+        %tr
+          %th Domain Name
+          %th Model Type
+          %th Model Identifier
+          %th Result
+          %th Created At
+      %tbody
+        - domains.each do |domain|
+          %tr.domain-item
+            %td= domain.name
+            %td= domain.model_type
+            %td= domain.model_identifier
+            %td= domain&.model_result
+            %td= domain.created_at.to_s(:short)
+  - else
+    .no-domains
+      %p You have no domains yet.

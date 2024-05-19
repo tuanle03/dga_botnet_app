@@ -1,10 +1,5 @@
 .container
   = render 'form'
 
-  -# .container
-  -#   - if @domains.present?
-  -#     %h2 Your Domains
-  -#     .domain-list-container
-  -#       %ul.domain-list
-  -#         - @domains.each do |domain|
-  -#           %li= "#{domain.name} - #{domain.model_type} - #{domain.model_identifier} - #{domain.model_result}"
+  - if user_signed_in?
+    = render 'results'

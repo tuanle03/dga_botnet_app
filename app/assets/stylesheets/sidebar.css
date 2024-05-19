@@ -41,6 +41,20 @@
 
 .sidebar-left a {
   text-decoration: none;
-  color: inherit;
+  color: #e0e0e0;
   cursor: pointer;
+}
+
+.hover-effect {
+  background-image: linear-gradient(to right, red, blue);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: all 0.3s ease;
+}
+
+.hover-effect:hover {
+  font-size: 25px;
+  color: #fff;
+  shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff, 0 0 80px #fff;
 }

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'domains#index'
+
   devise_for :users, path: '', path_names: {
     sign_in: 'login',
     sign_out: 'logout',
@@ -6,5 +8,4 @@ Rails.application.routes.draw do
   }
 
   resources :domains, only: [:index, :create]
-  root 'domains#index'
 end
