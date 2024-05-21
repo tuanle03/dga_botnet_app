@@ -23,6 +23,11 @@
   margin-bottom: 10px;
 }
 
+.table-wrapper {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
 .domain-table {
   width: 100%;
   border-collapse: collapse;
@@ -50,12 +55,20 @@
   background-color: #ffffff;
 }
 
-.domain-name,
-.domain-model,
-.domain-identifier,
-.domain-result {
-  display: inline-block;
-  text-align: left;
+.domain-name {
+  display: block;
+  font-weight: bold;
+}
+
+.domain-details {
+  margin-top: 5px;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.domain-type,
+.domain-identifier {
+  display: block;
 }
 
 .no-domains {

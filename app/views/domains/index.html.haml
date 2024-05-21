@@ -1,5 +1,53 @@
 .container
-  = render 'form'
-
-  - if user_signed_in?
+  .form-container
+    = render 'form'
+  .results-container
     = render 'results'
+
+:javascript
+  document.addEventListener('DOMContentLoaded', function() {
+    const formContainer = document.querySelector('.form-container');
+    const resultsContainer = document.querySelector('.results-container');
+
+    // Đảm bảo formContainer hiển thị và resultsContainer ẩn ban đầu
+    formContainer.classList.add('visible');
+    if (resultsContainer) resultsContainer.classList.add('hidden');
+
+    let currentView = 'form'; // Theo dõi phần tử hiện tại đang hiển thị
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        toggleView(event.key);
+      }
+    });
+
+    document.addEventListener('scroll', function() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > 0 && currentView === 'form') {
+        toggleView('ArrowDown');
+      } else if (scrollTop === 0 && currentView === 'results') {
+        toggleView('ArrowUp');
+      }
+    });
+
+    function toggleView(direction) {
+      if (direction === 'ArrowDown' && currentView === 'form') {
+        formContainer.classList.remove('visible');
+        formContainer.classList.add('hidden');
+        if (resultsContainer) {
+          resultsContainer.classList.remove('hidden');
+          resultsContainer.classList.add('visible');
+        }
+        currentView = 'results';
+      } else if (direction === 'ArrowUp' && currentView === 'results') {
+        formContainer.classList.remove('hidden');
+        formContainer.classList.add('visible');
+        if (resultsContainer) {
+          resultsContainer.classList.remove('visible');
+          resultsContainer.classList.add('hidden');
+        }
+        currentView = 'form';
+      }
+    }
+  });

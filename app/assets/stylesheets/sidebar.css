@@ -3,9 +3,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  /* background: linear-gradient(-135deg, #4158d0, #c850c0); */
+  /* background: linear-gradient(-135deg, #c850c0, #4158d0); */
   color: #fff;
   font-family: 'Poppins', sans-serif;
+  position: sticky;
+  top: 0px;
+  z-index: 1000;
 }
 
 .sidebar-left {

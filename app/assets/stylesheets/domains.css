@@ -1,5 +1,35 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  position: static;
+  overflow: hidden;
+}
+
+.form-container, .results-container {
+  transition: opacity 0.5s, transform 0.5s;
+  position: absolute;
+  width: 100%;
+  max-width: 600px;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(50px);
+  pointer-events: none; /* Ngăn người dùng tương tác với phần tử khi ẩn */
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto; /* Cho phép người dùng tương tác với phần tử khi hiện */
+}
+
 .domain-wrapper {
   width: 600px;
   background: #fff;
@@ -55,9 +85,14 @@
   transition: all 0.3s ease;
 }
 
+.div-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
 .domain-input {
   height: 100%;
-  width: 40%;
+  width: 60%;
   outline: none;
   font-size: 17px;
   padding-left: 20px;

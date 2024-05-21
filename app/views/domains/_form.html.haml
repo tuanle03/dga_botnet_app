@@ -5,12 +5,13 @@
       = f.text_field :name, required: true, class: 'domain-input-name', id: 'domain-name', autocomplete: 'off'
       = f.label :name, 'Domain Name'
       = f.submit 'Check', class: 'domain-btn'
-    .domain-field
-      = f.select :model_type, @models_by_type.keys, {}, class: 'domain-input', id: 'model_type_select'
-      = f.label :model_type, 'Model Type'
-    .domain-field
-      = f.select :model_identifier, [], {}, class: 'domain-input', id: 'model_identifier_select'
-      = f.label :model_identifier, 'Model Identifier'
+    .div-flex
+      .domain-field
+        = f.select :model_type, @models_by_type.keys, {}, class: 'domain-input', id: 'model_type_select'
+        = f.label :model_type, 'Model Type'
+      .domain-field
+        = f.select :model_identifier, [], {}, class: 'domain-input', id: 'model_identifier_select'
+        = f.label :model_identifier, 'Model Identifier'
 
 :javascript
   document.addEventListener("DOMContentLoaded", function() {

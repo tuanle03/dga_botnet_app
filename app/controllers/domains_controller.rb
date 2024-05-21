@@ -3,7 +3,11 @@ class DomainsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @domain = Domain.new
+    if current_user
+      @domains = current_user.domains.order(created_at: :desc)
+    else
+      @domains = []
+    end
 
     response = Domains::GetModelsService.new.call
     if response[:success]
@@ -15,6 +19,11 @@ class DomainsController < ApplicationController
       end
     else
       @models_by_type = {}
+    end
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
     end
   end
 
