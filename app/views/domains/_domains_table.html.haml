@@ -1,0 +1,15 @@
+%table.domain-table
+  %thead
+    %tr
+      %th Domain Name
+      %th Result
+      %th Created At
+  %tbody
+    - domains.each do |domain|
+      %tr.domain-item
+        %td= domain.name
+        %td= domain&.model_result
+        %td= domain.created_at.to_s(:short)
+      %tr.domain-details
+        %td= domain&.model_type
+        %td= domain&.model_identifier

@@ -1,0 +1,79 @@
+.user-domains {
+  width: 100%;
+  max-width: 800px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeInUp 1s ease-out forwards;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.user-domains .domain-title {
+  font-size: 25px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  user-select: none;
+  border-radius: 15px 15px 0 0;
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  margin-bottom: 10px;
+}
+
+.table-wrapper {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.domain-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.domain-table th,
+.domain-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.domain-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+  text-align: left;
+}
+
+.domain-item:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.domain-item:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.domain-name {
+  display: block;
+  font-weight: bold;
+}
+
+.domain-details {
+  margin-top: 5px;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.domain-type,
+.domain-identifier {
+  display: block;
+}
+
+.no-domains {
+  text-align: center;
+  font-size: 18px;
+  color: #999;
+  margin-top: 20px;
+}

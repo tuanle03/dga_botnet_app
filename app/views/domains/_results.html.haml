@@ -1,0 +1,9 @@
+.user-domains
+  .domain-title Check Results
+  - if @domains.any?
+    .table-wrapper
+      #domains-table
+        = render partial: 'domains_table', locals: { domains: @domains }
+  - else
+    .no-domains
+      %p You have no check results yet.

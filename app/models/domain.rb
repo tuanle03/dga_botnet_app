@@ -15,7 +15,7 @@ class Domain < ApplicationRecord
       update!(model_result: response[:result])
     else
       errors.add(:base, response[:error])
-      # raise ActiveRecord::RecordInvalid.new(self)
+      raise ActiveRecord::RecordInvalid.new(self)
     end
   end
 end

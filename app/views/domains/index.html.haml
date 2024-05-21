@@ -1,48 +1,53 @@
-%h1 Meow Botnet Service
-
-= form_with model: @domain, local: true do |f|
-  .form-group
-    = f.label :name, 'Domain Name'
-    = f.text_field :name, class: 'form-control', id: 'domain-name'
-
-  .form-group
-    = f.label :model_type, 'Model Type'
-    = f.select :model_type, @models_by_type.keys, {}, class: 'form-control', id: 'model_type_select'
-
-  .form-group
-    = f.label :model_identifier, 'Model Identifier'
-    = f.select :model_identifier, [], {}, class: 'form-control', id: 'model_identifier_select'
-
-  .form-group
-    = f.submit 'Check Domain', class: 'btn btn-primary'
+.container
+  .form-container
+    = render 'form'
+  .results-container
+    = render 'results'
 
 :javascript
-  document.addEventListener("DOMContentLoaded", function() {
-    const modelsByType = #{ @models_by_type.to_json.html_safe };
-    const modelTypeSelect = document.getElementById('model_type_select');
-    const modelIdentifierSelect = document.getElementById('model_identifier_select');
+  document.addEventListener('DOMContentLoaded', function() {
+    const formContainer = document.querySelector('.form-container');
+    const resultsContainer = document.querySelector('.results-container');
 
-    function updateModelIdentifiers() {
-      const selectedType = modelTypeSelect.value;
-      const modelIdentifiers = modelsByType[selectedType] || [];
-      modelIdentifierSelect.innerHTML = '';
-      modelIdentifiers.forEach(function(identifier) {
-        const option = document.createElement('option');
-        option.value = identifier;
-        option.textContent = identifier;
-        modelIdentifierSelect.appendChild(option);
-      });
-    }
+    // Đảm bảo formContainer hiển thị và resultsContainer ẩn ban đầu
+    formContainer.classList.add('visible');
+    if (resultsContainer) resultsContainer.classList.add('hidden');
 
-    modelTypeSelect.addEventListener('change', updateModelIdentifiers);
-    updateModelIdentifiers();
+    let currentView = 'form'; // Theo dõi phần tử hiện tại đang hiển thị
 
-    var inputField = document.getElementById('domain-name');
-
-    inputField.addEventListener('input', function(event) {
-      var inputValue = event.target.value;
-      if (/[^a-zA-Z0-9\-.]/.test(inputValue)) {
-        event.target.value = inputValue.replace(/[^a-zA-Z0-9\-.]/g, '');
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        toggleView(event.key);
       }
     });
+
+    document.addEventListener('scroll', function() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > 0 && currentView === 'form') {
+        toggleView('ArrowDown');
+      } else if (scrollTop === 0 && currentView === 'results') {
+        toggleView('ArrowUp');
+      }
+    });
+
+    function toggleView(direction) {
+      if (direction === 'ArrowDown' && currentView === 'form') {
+        formContainer.classList.remove('visible');
+        formContainer.classList.add('hidden');
+        if (resultsContainer) {
+          resultsContainer.classList.remove('hidden');
+          resultsContainer.classList.add('visible');
+        }
+        currentView = 'results';
+      } else if (direction === 'ArrowUp' && currentView === 'results') {
+        formContainer.classList.remove('hidden');
+        formContainer.classList.add('visible');
+        if (resultsContainer) {
+          resultsContainer.classList.remove('visible');
+          resultsContainer.classList.add('hidden');
+        }
+        currentView = 'form';
+      }
+    }
   });

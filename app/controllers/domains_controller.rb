@@ -1,10 +1,13 @@
 class DomainsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[create]
   skip_before_action :verify_authenticity_token
 
   def index
-    @domains = current_user.domains
-    @domain = Domain.new
+    if current_user
+      @domains = current_user.domains.order(created_at: :desc)
+    else
+      @domains = []
+    end
 
     response = Domains::GetModelsService.new.call
     if response[:success]
@@ -17,10 +20,11 @@ class DomainsController < ApplicationController
     else
       @models_by_type = {}
     end
-  end
 
-  def new
-    @domain = Domain.new
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def create
