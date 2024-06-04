@@ -1,6 +1,6 @@
 .domain-wrapper
   .domain-title Check Your Domain
-  = form_with model: @domain, local: true do |f|
+  = form_with model: @domain, url: domains_path, method: :post, local: true do |f|
     .domain-field
       = f.text_field :name, required: true, class: 'domain-input-name', id: 'domain-name', autocomplete: 'off'
       = f.label :name, 'Domain Name'
@@ -11,13 +11,22 @@
         = f.label :model_type, 'Model Type'
       .domain-field
         = f.select :model_identifier, [], {}, class: 'domain-input', id: 'model_identifier_select'
-        = f.label :model_identifier, 'Model Identifier'
+        = f.label :model_identifier, 'Model Name'
+
+.model-info-wrapper
+  .model-info-title Model Information
+  .model-info-container
+    .model-info
+      %p Please select a model type and name to see the information.
 
 :javascript
   document.addEventListener("DOMContentLoaded", function() {
     const modelsByType = #{ @models_by_type.to_json.html_safe };
+    const modelClassifyInfo = #{ @model_classify_info.to_json.html_safe };
+    const modelDetectInfo = #{ @model_detect_info.to_json.html_safe };
     const modelTypeSelect = document.getElementById('model_type_select');
     const modelIdentifierSelect = document.getElementById('model_identifier_select');
+    const modelInfoContainer = document.querySelector('.model-info');
 
     function updateModelIdentifiers() {
       const selectedType = modelTypeSelect.value;
@@ -29,9 +38,44 @@
         option.textContent = identifier;
         modelIdentifierSelect.appendChild(option);
       });
+      updateModelInfo();
+    }
+
+    function updateModelInfo() {
+      const selectedIdentifier = modelIdentifierSelect.value;
+      const selectedType = modelTypeSelect.value;
+      modelInfoContainer.innerHTML = '';
+      if (selectedType === 'classify') {
+        const info = modelClassifyInfo[selectedIdentifier]
+        if (info) {
+          const infoList = document.createElement('ul');
+          Object.keys(info).forEach(function(key) {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<strong>${key}:</strong> ${info[key]}`;
+            infoList.appendChild(listItem);
+          });
+          modelInfoContainer.appendChild(infoList);
+        } else {
+          modelInfoContainer.innerHTML = '<p>Please select a model type and identifier to see the information.</p>';
+        }
+      } else {
+        const info = modelDetectInfo[selectedIdentifier]
+        if (info) {
+          const infoList = document.createElement('ul');
+          Object.keys(info).forEach(function(key) {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<strong>${key}:</strong> ${info[key]}`;
+            infoList.appendChild(listItem);
+          });
+          modelInfoContainer.appendChild(infoList);
+        } else {
+          modelInfoContainer.innerHTML = '<p>Please select a model type and identifier to see the information.</p>';
+        }
+      }
     }
 
     modelTypeSelect.addEventListener('change', updateModelIdentifiers);
+    modelIdentifierSelect.addEventListener('change', updateModelInfo);
     updateModelIdentifiers();
 
     var inputField = document.getElementById('domain-name');

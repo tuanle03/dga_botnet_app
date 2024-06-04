@@ -1,15 +1,17 @@
 %table.domain-table
   %thead
     %tr
-      %th Domain Name
-      %th Result
-      %th Created At
+      %th{ width: '50%' } Domain
+      %th{ width: '20%' } Result
+      %th{ width: '30%' } Created At
   %tbody
     - domains.each do |domain|
       %tr.domain-item
         %td= domain.name
         %td= domain&.model_result
-        %td= domain.created_at.to_s(:short)
+        %td= domain.created_at.to_fs(:short)
       %tr.domain-details
-        %td= domain&.model_type
-        %td= domain&.model_identifier
+        %td{:colspan => 3}
+          %div.domain-detail
+            %span.domain-type Type: #{domain&.model_type}
+            %span.domain-identifier Name: #{domain&.model_identifier}

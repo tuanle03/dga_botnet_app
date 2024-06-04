@@ -3,6 +3,8 @@ class DomainsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
+    @domain = Domain.new
+
     if current_user
       @domains = current_user.domains.order(created_at: :desc)
     else
@@ -10,15 +12,27 @@ class DomainsController < ApplicationController
     end
 
     response = Domains::GetModelsService.new.call
+
     if response[:success]
       @models_by_type = {}
+      @model_classify_info = {}
+      @model_detect_info = {}
       response[:result].each do |domain|
         type = domain[:type]
         models = domain[:models].map { |model| model[:name] }
         @models_by_type[type] = models
+        domain[:models].each do |model|
+          if type == 'classify'
+            @model_classify_info[model[:name]] = model[:info]
+          else
+            @model_detect_info[model[:name]] = model[:info]
+          end
+        end
       end
     else
       @models_by_type = {}
+      @model_classify_info = {}
+      @model_detect_info = {}
     end
 
     respond_to do |format|
