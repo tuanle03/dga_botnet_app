@@ -15,6 +15,13 @@
         .checkbox
           %input{type: "checkbox", id: "remember-me"}
           %label{for: "remember-me"} Remember me
+
+      - if resource.errors.any?
+        .errors
+          %ul
+            - resource.errors.full_messages.each do |message|
+              %li{style: "color: red;"}= message
+
       .field
         = f.submit "Sign up"
       .signup-link

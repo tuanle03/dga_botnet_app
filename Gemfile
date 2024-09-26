@@ -38,6 +38,7 @@ gem 'httparty'
 gem 'jquery-rails'
 gem 'byebug'
 gem 'kaminari'
+gem 'ruby-openai'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem 'kredis'

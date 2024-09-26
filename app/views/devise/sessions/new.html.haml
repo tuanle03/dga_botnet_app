@@ -13,6 +13,12 @@
           .checkbox
             = f.check_box :remember_me, id: 'remember-me'
             = f.label :remember_me, 'Remember me', for: 'remember-me'
+
+      - if flash[:alert]
+        .errors
+          %ul
+            %li{style: 'color: red;'}= flash[:alert]
+
       .field
         = f.submit 'Log in'
       .signup-link
